@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" rx="16" fill="url(#bgGrad)" />
+  <rect x="2" y="2" width="796" height="496" rx="14" fill="none" stroke="#334155" stroke-width="1.5" />
+  
+  <!-- Browser Window Mockup -->
+  <rect x="30" y="30" width="740" height="440" rx="10" fill="#090d16" stroke="#1e293b" stroke-width="2" />
+  
+  <!-- Browser Header -->
+  <path d="M 30 40 Q 30 30 40 30 L 760 30 Q 770 30 770 40 L 770 70 L 30 70 Z" fill="#1e293b" />
+  <circle cx="55" cy="50" r="5" fill="#ef4444" />
+  <circle cx="72" cy="50" r="5" fill="#f59e0b" />
+  <circle cx="89" cy="50" r="5" fill="#10b981" />
+  
+  <!-- Address Bar -->
+  <rect x="120" y="40" width="540" height="20" rx="10" fill="#0f172a" />
+  <text x="390" y="54" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" text-anchor="middle">🔒 https://visaa.in — Visa & Immigration Platform</text>
+  
+  <!-- App Content Header -->
+  <rect x="50" y="90" width="700" height="40" fill="none" />
+  <text x="65" y="115" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="700">VISAA<tspan fill="#10b981">.IN</tspan></text>
+  <rect x="620" y="100" width="110" height="26" rx="6" fill="#10b981" />
+  <text x="675" y="117" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Apply Now</text>
+  
+  <!-- Hero Section inside Mockup -->
+  <rect x="50" y="145" width="700" height="150" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1" />
+  <text x="80" y="185" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" letter-spacing="1">GLOBAL VISA & IMMIGRATION SERVICES</text>
+  <text x="80" y="215" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="800">Dynamic Visa Processing & Lead Portal</text>
+  <text x="80" y="240" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13">Country-wise requirements, automated documentation & MongoDB lead capture.</text>
+  
+  <rect x="80" y="255" width="130" height="30" rx="6" fill="url(#accentGrad)" />
+  <text x="145" y="274" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Explore Countries</text>
+  
+  <!-- Country Cards Row -->
+  <g transform="translate(50, 310)">
+    <!-- Card 1 -->
+    <rect x="0" y="0" width="220" height="140" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <circle cx="30" cy="30" r="14" fill="#3b82f6" opacity="0.2" />
+    <text x="30" y="35" fill="#3b82f6" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" text-anchor="middle">🇨🇦</text>
+    <text x="60" y="34" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600">Canada Visa</text>
+    <text x="20" y="70" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">Tourist, Student & PR</text>
+    <rect x="20" y="95" width="80" height="22" rx="4" fill="#0f172a" />
+    <text x="60" y="110" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600" text-anchor="middle">Fast Track</text>
+    
+    <!-- Card 2 -->
+    <rect x="240" y="0" width="220" height="140" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <circle cx="270" cy="30" r="14" fill="#10b981" opacity="0.2" />
+    <text x="270" y="35" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" text-anchor="middle">🇬🇧</text>
+    <text x="300" y="34" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600">UK Visa</text>
+    <text x="260" y="70" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">Work, Business & Visitor</text>
+    <rect x="260" y="95" width="80" height="22" rx="4" fill="#0f172a" />
+    <text x="300" y="110" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600" text-anchor="middle">Verified API</text>
+
+    <!-- Card 3 -->
+    <rect x="480" y="0" width="220" height="140" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <circle cx="510" cy="30" r="14" fill="#f59e0b" opacity="0.2" />
+    <text x="510" y="35" fill="#f59e0b" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" text-anchor="middle">🇦🇺</text>
+    <text x="540" y="34" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600">Australia Visa</text>
+    <text x="500" y="70" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">Subclass 600 & Work</text>
+    <rect x="500" y="95" width="80" height="22" rx="4" fill="#0f172a" />
+    <text x="540" y="110" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600" text-anchor="middle">Instant Check</text>
+  </g>
+</svg>

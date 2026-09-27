@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c1322" />
+      <stop offset="100%" stop-color="#1a233a" />
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="500" rx="16" fill="url(#bgGrad2)" />
+  <rect x="2" y="2" width="796" height="496" rx="14" fill="none" stroke="#334155" stroke-width="1.5" />
+  
+  <!-- Browser Window Mockup -->
+  <rect x="30" y="30" width="740" height="440" rx="10" fill="#0b1120" stroke="#1e293b" stroke-width="2" />
+  
+  <!-- Browser Header -->
+  <path d="M 30 40 Q 30 30 40 30 L 760 30 Q 770 30 770 40 L 770 70 L 30 70 Z" fill="#1e293b" />
+  <circle cx="55" cy="50" r="5" fill="#ef4444" />
+  <circle cx="72" cy="50" r="5" fill="#f59e0b" />
+  <circle cx="89" cy="50" r="5" fill="#10b981" />
+  
+  <!-- Address Bar -->
+  <rect x="120" y="40" width="540" height="20" rx="10" fill="#0f172a" />
+  <text x="390" y="54" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="500" text-anchor="middle">🔒 https://jmttravel.in — Journey My Trip Travel Portal</text>
+  
+  <!-- App Content Header -->
+  <text x="65" y="115" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="700">JMT<tspan fill="#f97316">TRAVEL</tspan></text>
+  
+  <!-- Nav Items -->
+  <text x="300" y="114" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12">Tour Packages</text>
+  <text x="400" y="114" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12">Hotels</text>
+  <text x="470" y="114" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12">Flights</text>
+  <text x="540" y="114" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12">Contact</text>
+  
+  <rect x="630" y="98" width="100" height="26" rx="6" fill="url(#orangeGrad)" />
+  <text x="680" y="115" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" text-anchor="middle">Book Tour</text>
+  
+  <!-- Banner -->
+  <rect x="50" y="140" width="700" height="150" rx="8" fill="url(#cardGrad2)" stroke="#334155" stroke-width="1" />
+  <text x="80" y="180" fill="#f97316" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" letter-spacing="1">PREMIUM TOUR PACKAGES & BOOKINGS</text>
+  <text x="80" y="210" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="800">WordPress & Laravel Travel Application</text>
+  <text x="80" y="235" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13">API-driven bookings, dynamic package management & technical SEO.</text>
+  
+  <!-- Search Bar Inside Banner -->
+  <rect x="80" y="250" width="540" height="30" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+  <text x="100" y="270" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">Search destinations, packages, or customized trips...</text>
+  <rect x="520" y="253" width="96" height="24" rx="4" fill="#f97316" />
+  <text x="568" y="269" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600" text-anchor="middle">Search</text>
+  
+  <!-- Package Cards Row -->
+  <g transform="translate(50, 310)">
+    <!-- Card 1 -->
+    <rect x="0" y="0" width="220" height="140" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <rect x="10" y="10" width="200" height="60" rx="6" fill="#0f172a" />
+    <text x="110" y="45" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" text-anchor="middle">🏔️ International Tours</text>
+    <text x="15" y="95" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600">Custom Itineraries</text>
+    <text x="15" y="115" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700">API Integrated</text>
+    
+    <!-- Card 2 -->
+    <rect x="240" y="0" width="220" height="140" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <rect x="250" y="10" width="200" height="60" rx="6" fill="#0f172a" />
+    <text x="350" y="45" fill="#f59e0b" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" text-anchor="middle">🏖️ Domestic Packages</text>
+    <text x="255" y="95" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600">Instant Booking</text>
+    <text x="255" y="115" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700">MySQL Database</text>
+
+    <!-- Card 3 -->
+    <rect x="480" y="0" width="220" height="140" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+    <rect x="490" y="10" width="200" height="60" rx="6" fill="#0f172a" />
+    <text x="590" y="45" fill="#a855f7" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" text-anchor="middle">✈️ Flight & Hotel API</text>
+    <text x="495" y="95" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600">Live Synchronization</text>
+    <text x="495" y="115" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700">99.9% Uptime</text>
+  </g>
+</svg>
