@@ -50,7 +50,6 @@ export const PERSONAL_INFO = {
     "Web Developer with 3 years of experience building and maintaining business websites and web applications across WordPress, PHP/Laravel, React.js, and Next.js. Experienced in REST APIs, database integration, responsive UI, debugging, performance optimization, SEO-friendly development, and production deployments.",
   experienceYears: "3+",
   location: "Delhi, India",
-  phone: "+91 8766343405",
   email: "yashverma.u786@gmail.com",
   linkedIn: "https://www.linkedin.com/in/yash-verma-webdeveloper/",
   gitHub: "https://github.com/yashverma",

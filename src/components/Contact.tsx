@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, MapPin, Linkedin, Github, Send, CheckCircle2, AlertCircle, Copy, Check } from "lucide-react";
+import { Mail, MapPin, Linkedin, Github, Send, CheckCircle2, AlertCircle, Copy, Check, Loader2 } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 
 export default function Contact() {
@@ -13,17 +13,23 @@ export default function Contact() {
   });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submittedContact, setSubmittedContact] = useState<{ name: string; email: string } | null>(null);
   const [error, setError] = useState("");
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedPhone, setCopiedPhone] = useState(false);
+
+  const ACCESS_KEY =
+    process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
+    "d97a6eda-8ec4-4bd3-b58b-375a684438ff";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (error) setError("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (loading) return;
+
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setError("Please fill out all required fields.");
       return;
@@ -38,23 +44,41 @@ export default function Contact() {
     setLoading(true);
     setError("");
 
-    // Simulate reliable form submission processing
-    setTimeout(() => {
+    try {
+      const formElement = e.currentTarget;
+      const submissionData = new FormData(formElement);
+
+      // Ensure access_key is attached
+      submissionData.set("access_key", ACCESS_KEY);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: submissionData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmittedContact({ name: formData.name, email: formData.email });
+        setSubmitted(true);
+        // Reset the form only after successful submission
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        formElement.reset();
+      } else {
+        setError(data.message || "Failed to submit form. Please try again.");
+      }
+    } catch (err) {
+      console.error("Web3Forms submission error:", err);
+      setError("Unable to send message due to a network error. Please try again or email directly.");
+    } finally {
       setLoading(false);
-      setSubmitted(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 800);
+    }
   };
 
-  const copyToClipboard = (text: string, type: "email" | "phone") => {
+  const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    if (type === "email") {
-      setCopiedEmail(true);
-      setTimeout(() => setCopiedEmail(false), 2000);
-    } else {
-      setCopiedPhone(true);
-      setTimeout(() => setCopiedPhone(false), 2000);
-    }
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
   };
 
   return (
@@ -102,38 +126,12 @@ export default function Contact() {
                   </div>
                 </div>
                 <button
-                  onClick={() => copyToClipboard(PERSONAL_INFO.email, "email")}
+                  onClick={() => copyToClipboard(PERSONAL_INFO.email)}
                   className="p-2 rounded-lg text-slate-500 hover:text-emerald-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
                   title="Copy email address"
                   aria-label="Copy email"
                 >
                   {copiedEmail ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
-
-              {/* Phone Box */}
-              <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/60">
-                <div className="flex items-center space-x-3.5">
-                  <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono text-slate-400 uppercase">Phone</span>
-                    <a
-                      href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, "")}`}
-                      className="block text-sm font-bold text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                    >
-                      {PERSONAL_INFO.phone}
-                    </a>
-                  </div>
-                </div>
-                <button
-                  onClick={() => copyToClipboard(PERSONAL_INFO.phone, "phone")}
-                  className="p-2 rounded-lg text-slate-500 hover:text-emerald-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
-                  title="Copy phone number"
-                  aria-label="Copy phone number"
-                >
-                  {copiedPhone ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
 
@@ -197,10 +195,13 @@ export default function Contact() {
                     Message Sent Successfully!
                   </h4>
                   <p className="text-sm text-slate-600 dark:text-slate-300">
-                    Thank you for reaching out, {formData.name || "friend"}. I have received your message and will reply shortly to <span className="font-semibold">{formData.email}</span>.
+                    Thank you for reaching out{submittedContact?.name ? `, ${submittedContact.name}` : ""}. I have received your message and will reply shortly to <span className="font-semibold">{submittedContact?.email || "your email"}</span>.
                   </p>
                   <button
-                    onClick={() => setSubmitted(false)}
+                    onClick={() => {
+                      setSubmitted(false);
+                      setError("");
+                    }}
                     className="mt-4 px-6 py-2.5 rounded-xl text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white transition-colors"
                   >
                     Send Another Message
@@ -208,6 +209,16 @@ export default function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
+                  {/* Web3Forms Honeypot Spam Protection */}
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    className="hidden"
+                    style={{ display: "none" }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                  <input type="hidden" name="access_key" value={ACCESS_KEY} />
                   
                   {error && (
                     <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 text-xs sm:text-sm flex items-center space-x-2">
@@ -289,10 +300,13 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-600 transition-all shadow-md flex items-center justify-center space-x-2 text-sm sm:text-base disabled:opacity-50 focus:outline-none"
+                    className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-600 transition-all shadow-md flex items-center justify-center space-x-2 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none"
                   >
                     {loading ? (
-                      <span>Sending Message...</span>
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending Message...</span>
+                      </>
                     ) : (
                       <>
                         <span>Send Message</span>
