@@ -51,7 +51,7 @@ export default function About() {
               <div className="relative aspect-[4/3] w-full">
                 <Image
                   src={PERSONAL_INFO.avatarSecondary}
-                  alt="Yash Verma working"
+                  alt="Yash Verma — Web Developer and Software Engineer in Delhi NCR"
                   fill
                   sizes="(max-width: 768px) 100vw, 450px"
                   className="object-cover object-center"

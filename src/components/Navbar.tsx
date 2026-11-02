@@ -1,21 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { Menu, X, Sun, Moon, ArrowUpRight, ChevronDown } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
+import { siteConfig } from "@/config/site";
 
 const NAV_LINKS = [
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Services", href: "#services" },
-  { name: "Process", href: "#process" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "/#about" },
+  { name: "Experience", href: "/#experience" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Process", href: "/#process" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -24,7 +26,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sections = NAV_LINKS.map((link) => link.href.substring(1));
+      const sections = ["about", "experience", "projects", "skills", "services", "process", "contact"];
       const scrollPosition = window.scrollY + 120;
 
       for (const section of sections) {
@@ -45,11 +47,12 @@ export default function Navbar() {
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
     setMobileMenuOpen(false);
-    const targetId = href.replace("#", "");
+    setServicesDropdownOpen(false);
+    const targetId = href.replace("/#", "").replace("#", "");
     const elem = document.getElementById(targetId);
     if (elem) {
+      e.preventDefault();
       const offsetTop = elem.offsetTop - 80;
       window.scrollTo({
         top: offsetTop,
@@ -69,9 +72,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
-          <a
-            href="#hero"
-            onClick={(e) => handleNavClick(e, "#hero")}
+          <Link
+            href="/#hero"
+            onClick={(e) => handleNavClick(e, "/#hero")}
             className="group flex items-center space-x-2 focus:outline-none"
             aria-label="Yash Verma Homepage"
           >
@@ -80,20 +83,61 @@ export default function Navbar() {
             </span>
             <div className="flex flex-col">
               <span className="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                Yash Verma
+                {siteConfig.name}
               </span>
               <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 dark:text-slate-400">
                 Web Developer
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center space-x-1 lg:space-x-2" aria-label="Main Navigation">
+            {/* Services Dropdown */}
+            <div className="relative" onMouseLeave={() => setServicesDropdownOpen(false)}>
+              <button
+                onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+                onMouseEnter={() => setServicesDropdownOpen(true)}
+                className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all inline-flex items-center space-x-1 ${
+                  activeSection === "services"
+                    ? "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40"
+                    : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60"
+                }`}
+                aria-expanded={servicesDropdownOpen}
+              >
+                <span>Services</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesDropdownOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {servicesDropdownOpen && (
+                <div className="absolute left-0 mt-1 w-64 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 shadow-xl p-2 z-50 animate-fade-in">
+                  <Link
+                    href="/#services"
+                    onClick={(e) => handleNavClick(e, "/#services")}
+                    className="block px-3 py-2 rounded-xl text-xs font-bold text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 uppercase tracking-wider mb-1"
+                  >
+                    All Services Overview
+                  </Link>
+                  <div className="border-t border-slate-100 dark:border-slate-900 my-1" />
+                  {siteConfig.services.map((srv) => (
+                    <Link
+                      key={srv.slug}
+                      href={srv.path}
+                      onClick={() => setServicesDropdownOpen(false)}
+                      className="block px-3 py-2 rounded-xl text-sm font-medium text-slate-800 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                    >
+                      {srv.shortTitle}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
+              const sectionName = link.href.replace("/#", "");
+              const isActive = activeSection === sectionName;
               return (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
@@ -104,7 +148,7 @@ export default function Navbar() {
                   }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               );
             })}
           </nav>
@@ -125,14 +169,14 @@ export default function Navbar() {
             </button>
 
             {/* Desktop CTA Button */}
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
+            <Link
+              href="/#contact"
+              onClick={(e) => handleNavClick(e, "/#contact")}
               className="hidden sm:inline-flex items-center space-x-1.5 px-4 py-2 rounded-lg text-sm font-medium text-white bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-600 transition-all shadow-sm focus:outline-none"
             >
               <span>Get In Touch</span>
               <ArrowUpRight className="w-4 h-4" />
-            </a>
+            </Link>
 
             {/* Mobile Hamburger Toggle Button */}
             <button
@@ -149,11 +193,29 @@ export default function Navbar() {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[65px] bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-xl px-4 pt-3 pb-6 space-y-2 animate-fade-in">
+        <div className="md:hidden fixed inset-x-0 top-[65px] bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 shadow-xl px-4 pt-3 pb-6 space-y-2 animate-fade-in max-h-[calc(100vh-70px)] overflow-y-auto">
+          {/* Services Group */}
+          <div className="p-2 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 space-y-1">
+            <span className="block px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400">
+              Services
+            </span>
+            {siteConfig.services.map((srv) => (
+              <Link
+                key={srv.slug}
+                href={srv.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-800 dark:text-slate-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-600 dark:hover:text-emerald-400"
+              >
+                {srv.shortTitle}
+              </Link>
+            ))}
+          </div>
+
           {NAV_LINKS.map((link) => {
-            const isActive = activeSection === link.href.substring(1);
+            const sectionName = link.href.replace("/#", "");
+            const isActive = activeSection === sectionName;
             return (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
@@ -164,18 +226,18 @@ export default function Navbar() {
                 }`}
               >
                 {link.name}
-              </a>
+              </Link>
             );
           })}
           <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
+            <Link
+              href="/#contact"
+              onClick={(e) => handleNavClick(e, "/#contact")}
               className="flex items-center justify-center space-x-2 w-full py-3 px-4 rounded-lg text-base font-medium text-white bg-slate-900 dark:bg-emerald-500 hover:bg-slate-800 dark:hover:bg-emerald-600 transition-colors"
             >
               <span>Contact Yash Verma</span>
               <ArrowUpRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
       )}

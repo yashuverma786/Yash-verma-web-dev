@@ -52,7 +52,7 @@ export const PERSONAL_INFO = {
   location: "Delhi, India",
   email: "yashverma.u786@gmail.com",
   linkedIn: "https://www.linkedin.com/in/yash-verma-webdeveloper/",
-  gitHub: "https://github.com/yashverma",
+  gitHub: "https://github.com/yashuverma786",
   education: "Bachelor of Computer Administration (BCA) — IGNOU (Pursuing)",
   avatar: "/assets/yash-verma.jpg",
   avatarSecondary: "/assets/yash-verma-2.jpg",

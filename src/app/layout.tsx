@@ -3,6 +3,8 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import Chatbot from "@/components/Chatbot";
+import StructuredData from "@/components/StructuredData";
+import { siteConfig } from "@/config/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,53 +28,108 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yashverma.dev"),
-  title: "Yash Verma | Web Developer | WordPress, React & Laravel",
-  description:
-    "Yash Verma is a Web Developer specializing in WordPress, PHP/Laravel, React, Next.js and full-stack web development with 3 years of production experience.",
-  keywords: [
-    "Yash Verma",
-    "Web Developer",
-    "WordPress Developer",
-    "React Developer",
-    "Next.js Developer",
-    "Laravel Developer",
-    "PHP Developer",
-    "Full-Stack Developer",
-    "Delhi Web Developer",
-    "visaa.in",
-    "jmttravel.in",
-  ],
-  authors: [{ name: "Yash Verma", url: "https://github.com/yashverma" }],
-  creator: "Yash Verma",
+  metadataBase: new URL("https://yash-verma-portfolio-drab.vercel.app/"),
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name} — ${siteConfig.author.role}`,
+  },
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.author.name, url: siteConfig.author.gitHub }],
+  creator: siteConfig.author.name,
+  publisher: siteConfig.author.name,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://yashverma.dev",
-    title: "Yash Verma | Web Developer | WordPress, React & Laravel",
-    description:
-      "Web Developer with 3 years of experience building business websites, enterprise dashboards, and Next.js applications.",
-    siteName: "Yash Verma Portfolio",
+    locale: siteConfig.locale,
+    url: "https://yash-verma-portfolio-drab.vercel.app/",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: `${siteConfig.name} Portfolio`,
     images: [
       {
         url: "/assets/yash-verma.jpg",
         width: 1200,
         height: 630,
-        alt: "Yash Verma - Web Developer",
+        alt: `${siteConfig.name} — Web Developer`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yash Verma | Web Developer",
-    description:
-      "Web Developer specializing in WordPress, PHP/Laravel, React, Next.js and Node.js.",
+    title: siteConfig.title,
+    description: siteConfig.description,
     images: ["/assets/yash-verma.jpg"],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://yash-verma-portfolio-drab.vercel.app/#person",
+  name: siteConfig.author.name,
+  jobTitle: siteConfig.author.role,
+  url: "https://yash-verma-portfolio-drab.vercel.app/",
+  image: "https://yash-verma-portfolio-drab.vercel.app/assets/yash-verma.jpg",
+  sameAs: [siteConfig.author.gitHub, siteConfig.author.linkedIn],
+  email: siteConfig.author.email,
+  worksFor: {
+    "@type": "Organization",
+    name: siteConfig.author.company,
+    location: {
+      "@type": "Place",
+      name: siteConfig.author.companyLocation,
+    },
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Delhi",
+    addressRegion: "Delhi NCR",
+    addressCountry: "IN",
+  },
+  knowsAbout: [
+    "Web Development",
+    "WordPress",
+    "WordPress Theme Development",
+    "WordPress Plugin Development",
+    "Next.js",
+    "React.js",
+    "PHP",
+    "Laravel",
+    "TypeScript",
+    "Tailwind CSS",
+    "REST APIs",
+    "Technical SEO",
+    "Core Web Vitals",
+    "MySQL",
+    "MongoDB",
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://yash-verma-portfolio-drab.vercel.app/#website",
+  url: "https://yash-verma-portfolio-drab.vercel.app/",
+  name: `${siteConfig.name} — Web Developer Portfolio`,
+  description: siteConfig.description,
+  publisher: {
+    "@id": "https://yash-verma-portfolio-drab.vercel.app/#person",
+  },
+  inLanguage: "en-US",
 };
 
 export default function RootLayout({
@@ -82,6 +139,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+      <head>
+        <StructuredData data={[personSchema, websiteSchema]} />
+      </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 antialiased selection:bg-emerald-500 selection:text-white`}
       >

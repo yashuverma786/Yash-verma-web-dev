@@ -43,10 +43,10 @@ export default function Hero() {
             {/* Name & Title */}
             <div>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
-                Hi, I&apos;m <span className="text-emerald-600 dark:text-emerald-400">{PERSONAL_INFO.name}</span>
+                Hi, I&apos;m <span className="text-emerald-600 dark:text-emerald-400">Yash Verma</span> — Web Developer
               </h1>
               <p className="mt-2 text-base sm:text-xl font-medium text-slate-600 dark:text-slate-300">
-                {PERSONAL_INFO.subTitle}
+                WordPress Development &bull; React.js &bull; Next.js &bull; Full-Stack Web Development
               </p>
             </div>
 
@@ -57,7 +57,7 @@ export default function Hero() {
 
             {/* Short Introduction */}
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
-              Full-stack developer with <strong>3 years of experience</strong> building enterprise dashboards, booking portals, client sites, and Next.js applications with REST APIs, clean UI, and production readiness.
+              Full-stack web developer with <strong>3+ years of production experience</strong> building enterprise dashboards, booking portals, client sites, and Next.js applications across Delhi NCR, Gurgaon, and for global clients.
             </p>
 
             {/* CTAs & Social Links */}
@@ -132,7 +132,7 @@ export default function Hero() {
                 <div className="relative aspect-[4/4.5] w-full">
                   <Image
                     src={PERSONAL_INFO.avatar}
-                    alt="Yash Verma - Web Developer"
+                    alt="Yash Verma — Web Developer specializing in WordPress, React and Next.js"
                     fill
                     sizes="(max-width: 768px) 100vw, 400px"
                     priority
